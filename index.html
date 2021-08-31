@@ -9,7 +9,21 @@
 </head>
 
 <body>
+   <form id="book" onsubmit="addNewBookToLibrary()">
+      <label>Book Details</label><br />
+
+      <label>Title: </label><input type="text" id="title" required> <br />
+      <label>Author: </label><input type="text" id="author" required><br />
+      <label>Number of Pages: </label><input type="text" id="numberOfPages" required><br />
+      <label>Has Been Read: </label><input type="radio" value="yes" id="yesIsRead" name="isRead" required><label
+         for="yesIsRead">Yes</label><input type="radio" value="no" id="noIsRead" name="isRead" required><label
+         for="noIsRead">No</label><br />
+      <input type="submit" value="Submit">
+
+      <div id="divLibrary"></div>
+   </form>
    <script src='script.js'></script>
 </body>
+
 
 </html>

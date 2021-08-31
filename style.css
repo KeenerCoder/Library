@@ -1,0 +1,17 @@
+tr{
+   border: solid 100px orange;
+   color: purple;
+}
+label{
+   border: solid 1px green;
+}
+th{
+   /* border: solid 1px red; */
+}
+td{
+   color: blue;
+   /* border: solid 1px black; */
+}
+table{
+   border-collapse: collapse;
+}
