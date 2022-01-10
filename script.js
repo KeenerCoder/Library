@@ -2,13 +2,19 @@ let myLibrary;
 
 if (!localStorage.myLibrary) {
    myLibrary = [];
-   const book1 = new Book("The Maker's Diet", "Rubin", 324, false);
-   const book2 = new Book("The Proximity Principle", "Coleman", 189, true);
-   const book3 = new Book("Already Compromised", "Ham", 288, true);
+   const book1 = new Book("The Maker's Diet", "Rubin", 9324, false, 1);
+   const book2 = new Book("The Proximity Principle", "Coleman", 189, true, 2);
+   const book3 = new Book("Already Compromised", "Ham", 288, true, 3);
+   const book4 = new Book("Cat in the Hat", "Seuss", 33, true, 4);
+   const book5 = new Book("Hand Hand Fingers Thumb", "Seuss", 44, false, 5);
+   const book6 = new Book("Green Eggs and Ham", "Seuss", 55, true, 6);
 
    addBookToLibrary(book1);
    addBookToLibrary(book2);
    addBookToLibrary(book3);
+   addBookToLibrary(book4);
+   addBookToLibrary(book5);
+   addBookToLibrary(book6);
 }
 else {
    let myLibraryObjects = localStorage.getItem("myLibrary");
@@ -18,11 +24,12 @@ else {
 displayBookLibrary();
 
 
-function Book(title, author, numberOfPages, haveRead) {
+function Book(title, author, numberOfPages, haveRead, libraryIndexNumber) {
    this.title = title;
    this.author = author;
    this.numberOfPages = numberOfPages;
    this.haveRead = haveRead;
+   this.libraryIndexNumber = libraryIndexNumber;
    this.info = function () {
       return this.title +
          " by " +
@@ -32,6 +39,12 @@ function Book(title, author, numberOfPages, haveRead) {
          " pages, " +
          haveRead ? "have read" : "not read yet";
    }
+}
+const allBooks = document.querySelectorAll(".book");
+for (let index = 0; index < allBooks.length; index++) {
+   allBooks[index].querySelector("button").addEventListener("click", function () {
+      // this.remove();
+   })
 }
 
 function addNewBookToLibrary() {
@@ -46,6 +59,7 @@ function getBookDetails() {
    newBook.author = document.getElementById('author').value;
    newBook.numberOfPages = document.getElementById('numberOfPages').value;
    newBook.haveRead = false;
+   newBook.libraryIndexNumber = newBook.title + newBook.author + newBook.numberOfPages;
    return newBook;
 }
 
@@ -54,16 +68,23 @@ function addBookToLibrary(book) {
    localStorage.removeItem("myLibrary");
    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
 }
-function removeBookFromLibrary(item) {
-
-   myLibrary.splice(myLibrary.indexOf(item.index), 1);
+function removeBookFromLibrary(bookIndex) {
+   myLibrary.splice(bookIndex, 1);
    localStorage.removeItem("myLibrary");
 
    if (myLibrary.length > 0) {
       localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
-      displayBookLibrary();
    }
+   displayBookLibrary();
+}
+function toggleRead(bookIndex) {
+   myLibrary[bookIndex].haveRead = !myLibrary[bookIndex].haveRead;
+   localStorage.removeItem("myLibrary");
 
+   if (myLibrary.length > 0) {
+      localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+   }
+   displayBookLibrary();
 }
 
 function displayBookLibrary() {
@@ -76,6 +97,7 @@ function displayBookLibrary() {
       libraryData += "<th>Author</th>";
       libraryData += "<th>Number of Pages</th>";
       libraryData += "<th>Has Been Read</th>";
+
       libraryData += "</thead>";
       libraryData += "</tr>";
 
@@ -84,8 +106,9 @@ function displayBookLibrary() {
          myLibrary = JSON.parse(myLibraryObjects);
       }
 
+      let count = 0;
       myLibrary.forEach(book => {
-         libraryData += "<tr style='border: solid 1px pink'>";
+         libraryData += "<tr style='border: solid 1px pink' class='book'>";
          libraryData += "<td>";
          libraryData += book.title;
          libraryData += "</td>";
@@ -96,12 +119,14 @@ function displayBookLibrary() {
          libraryData += book.numberOfPages;
          libraryData += "</td>";
          libraryData += "<td>";
-         libraryData += book.haveRead ? "Yes" : "No";
+         libraryData += "<button onclick='toggleRead(" + count + ");'>" + `${book.haveRead ? "Read" : "Not Read"}` + "</button>";
          libraryData += "</td>";
          libraryData += "<td>";
-         libraryData += "<button onclick='removeBookFromLibrary(this);'>Remove Book</button>";
+         libraryData += "<button onclick='removeBookFromLibrary(" + count + ");'>Remove Book</button>";
          libraryData += "</td>";
+
          libraryData += "</tr>";
+         count++;
       });
       libraryData += "</table>";
    }
@@ -109,4 +134,10 @@ function displayBookLibrary() {
    divLibrary.innerHTML = libraryData;
 
 }
+function CleanLibrary() {
+   console.log("cleantime");
+   localStorage.removeItem("myLibrary");
+   displayBookLibrary();
+}
+
 
