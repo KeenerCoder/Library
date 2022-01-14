@@ -3,7 +3,7 @@ tr{
    color: purple;
 }
 label{
-   border: solid 1px green;
+   /*border: solid 1px green;*/
 }
 th{
    /* border: solid 1px red; */
@@ -14,4 +14,44 @@ td{
 }
 table{
    border-collapse: collapse;
+}
+.modal{
+ display: none;
+ position: fixed; /* Stay in place */
+ z-index: 1; /* Sit on top */
+ left: 80px;
+ top: 80px;
+ padding: 10px;
+ padding-top: 5px;
+ width: auto; /* Full width */
+ height: auto; /* Full height */
+ overflow: auto; /* Enable scroll if needed */
+ background-color: rgb(158, 221, 221); /* Fallback color */
+ justify-content: center;
+ align-items: center;
+}
+.close{
+   float: right;
+}
+.close:hover{
+   font-weight: bolder;
+}
+.center{
+   display: flex;
+   justify-content: left;
+   align-items: center;
+}
+.textCursor{
+   cursor: text;
+   color: orange;
+}
+input[type='text']{
+   color:blue;
+}
+input[type='number']{
+   color:purple;
+   cursor: text;
+}
+.block{
+   display: block;
 }

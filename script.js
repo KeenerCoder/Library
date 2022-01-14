@@ -1,8 +1,11 @@
 let myLibrary;
+// let emptyLibrary = false;
 
+// if (!localStorage.myLibrary && !emptyLibrary) {
 if (!localStorage.myLibrary) {
+   //alert("making a bunch of book entries");
    myLibrary = [];
-   const book1 = new Book("The Maker's Diet", "Rubin", 9324, false, 1);
+   const book1 = new Book("The Maker's Diet", "Rubin", 324, false, 1);
    const book2 = new Book("The Proximity Principle", "Coleman", 189, true, 2);
    const book3 = new Book("Already Compromised", "Ham", 288, true, 3);
    const book4 = new Book("Cat in the Hat", "Seuss", 33, true, 4);
@@ -17,10 +20,12 @@ if (!localStorage.myLibrary) {
    addBookToLibrary(book6);
 }
 else {
+   // alert("not making any default entries");
    let myLibraryObjects = localStorage.getItem("myLibrary");
    myLibrary = JSON.parse(myLibraryObjects);
 }
 
+// emptyLibrary = false;
 displayBookLibrary();
 
 
@@ -48,9 +53,12 @@ for (let index = 0; index < allBooks.length; index++) {
 }
 
 function addNewBookToLibrary() {
+   // console.log("anb1");
    const newBook = getBookDetails();
+   // console.log("anb2")
    addBookToLibrary(newBook);
    displayBookLibrary();
+   alert("added new book");
 }
 
 function getBookDetails() {
@@ -135,9 +143,34 @@ function displayBookLibrary() {
 
 }
 function CleanLibrary() {
-   console.log("cleantime");
+   // console.log("cleantime");
    localStorage.removeItem("myLibrary");
    displayBookLibrary();
 }
 
+function DeleteLibrary() {
+   // console.log("purgetime");
+   localStorage.removeItem("myLibrary");
+   emptyLibrary = true;
+   displayBookLibrary();
+}
+
+var modalBookDetail = document.getElementById("newBookDetailsModal");
+var btnAddNewBook = document.getElementById("btnAddNewBook");
+var spanCloseAddNewBook = document.getElementsByClassName("close")[0];
+
+btnAddNewBook.onclick = function () {
+   modalBookDetail.style.display = "block";
+}
+
+window.onclick = function (event) {
+   console.log("clicked the window");
+   console.log("the event.target is: " + event.target);
+
+   if (event.target == modalBookDetail)
+      modalBookDetail.style.display = "none";
+}
+spanCloseAddNewBook.onclick = function () {
+   modalBookDetail.style.display = "none";
+}
 
