@@ -16,10 +16,8 @@
          <span class="close">&times;</span>
       </div>
       <div id="modal-content" class="center block">
-         <!--<form id="book" onsubmit="addNewBookToLibrary()">-->
          <form id="book" onsubmit="addNewBookToLibrary()">
             <label>Book Details</label><br />
-
             <input type="text" id="title" required placeholder="Title" class="block"> <br />
             <input type="text" id="author" required placeholder="Author" class="block"><br />
             <input type="number" id="numberOfPages" required placeholder="Number of Pages"
@@ -29,12 +27,10 @@
                for="noIsRead">No</label><br />
             <input type="submit" value="Submit" class="center block">
          </form>
-         <!--<input type="submit" value="Submit" onsubmit="addNewBookToLibrary()" class="center block">
-         </form>-->
       </div>
    </div>
-   <input type="button" value="Clean Library" onclick="CleanLibrary()">
-   <input type="button" value="Delete Library" onclick="DeleteLibrary()">
+   <input type="button" value="xClean Library" onclick="CleanLibrary()" id="btnCleanLibrary">
+   <input type="button" value="Delete Library" onclick="DeleteLibrary()" id="btnDeleteLibrary">
 
    <div id="divLibrary"></div>
 

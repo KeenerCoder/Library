@@ -1,9 +1,7 @@
 let myLibrary;
-// let emptyLibrary = false;
+let prePopulateLibrary = false;
 
-// if (!localStorage.myLibrary && !emptyLibrary) {
-if (!localStorage.myLibrary) {
-   //alert("making a bunch of book entries");
+if (!localStorage.myLibrary && prePopulateLibrary) {
    myLibrary = [];
    const book1 = new Book("The Maker's Diet", "Rubin", 324, false, 1);
    const book2 = new Book("The Proximity Principle", "Coleman", 189, true, 2);
@@ -20,12 +18,10 @@ if (!localStorage.myLibrary) {
    addBookToLibrary(book6);
 }
 else {
-   // alert("not making any default entries");
    let myLibraryObjects = localStorage.getItem("myLibrary");
    myLibrary = JSON.parse(myLibraryObjects);
 }
 
-// emptyLibrary = false;
 displayBookLibrary();
 
 
@@ -53,12 +49,10 @@ for (let index = 0; index < allBooks.length; index++) {
 }
 
 function addNewBookToLibrary() {
-   // console.log("anb1");
    const newBook = getBookDetails();
-   // console.log("anb2")
    addBookToLibrary(newBook);
    displayBookLibrary();
-   alert("added new book");
+   alert("Added new book");
 }
 
 function getBookDetails() {
@@ -72,6 +66,9 @@ function getBookDetails() {
 }
 
 function addBookToLibrary(book) {
+   if (!myLibrary) {
+      myLibrary = [];
+   }
    myLibrary.push(book);
    localStorage.removeItem("myLibrary");
    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
@@ -97,10 +94,11 @@ function toggleRead(bookIndex) {
 
 function displayBookLibrary() {
    let libraryData = "";
-   if (myLibrary.length > 0) {
+   if (myLibrary && myLibrary.length > 0) {
       libraryData = "<table stlye='border-collapse: collapse'>";
       libraryData += "<thead>";
-      libraryData += "<tr style='border: solid 1px yellow'>";
+      libraryData += "<tr>";
+      // libraryData += "<tr style='border: solid 1px yellow'>";
       libraryData += "<th>Title</th>";
       libraryData += "<th>Author</th>";
       libraryData += "<th>Number of Pages</th>";
@@ -116,7 +114,8 @@ function displayBookLibrary() {
 
       let count = 0;
       myLibrary.forEach(book => {
-         libraryData += "<tr style='border: solid 1px pink' class='book'>";
+         // libraryData += "<tr style='border: solid 1px pink' class='book'>";
+         libraryData += "<tr class='book'>";
          libraryData += "<td>";
          libraryData += book.title;
          libraryData += "</td>";
@@ -143,13 +142,11 @@ function displayBookLibrary() {
 
 }
 function CleanLibrary() {
-   // console.log("cleantime");
    localStorage.removeItem("myLibrary");
    displayBookLibrary();
 }
 
 function DeleteLibrary() {
-   // console.log("purgetime");
    localStorage.removeItem("myLibrary");
    emptyLibrary = true;
    displayBookLibrary();

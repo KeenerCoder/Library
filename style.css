@@ -1,5 +1,5 @@
 tr{
-   border: solid 100px orange;
+   /*border: solid 100px orange;*/
    color: purple;
 }
 label{
@@ -54,4 +54,10 @@ input[type='number']{
 }
 .block{
    display: block;
+}
+#btnCleanLibrary{
+   display:none;
+}
+#btnDeleteLibrary{
+   display:none;
 }
