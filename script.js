@@ -25,22 +25,25 @@ else {
 displayBookLibrary();
 
 
-function Book(title, author, numberOfPages, haveRead, libraryIndexNumber) {
-   this.title = title;
-   this.author = author;
-   this.numberOfPages = numberOfPages;
-   this.haveRead = haveRead;
-   this.libraryIndexNumber = libraryIndexNumber;
-   this.info = function () {
-      return this.title +
-         " by " +
-         this.author +
-         ", " +
-         numberOfPages +
-         " pages, " +
-         haveRead ? "have read" : "not read yet";
+class Book {
+   constructor(title, author, numberOfPages, haveRead, libraryIndexNumber) {
+      this.title = title;
+      this.author = author;
+      this.numberOfPages = numberOfPages;
+      this.haveRead = haveRead;
+      this.libraryIndexNumber = libraryIndexNumber;
+      this.info = function () {
+         return this.title +
+            " by " +
+            this.author +
+            ", " +
+            numberOfPages +
+            " pages, " +
+            haveRead ? "have read" : "not read yet";
+      }
    }
 }
+
 const allBooks = document.querySelectorAll(".book");
 for (let index = 0; index < allBooks.length; index++) {
    allBooks[index].querySelector("button").addEventListener("click", function () {
